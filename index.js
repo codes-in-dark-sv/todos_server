@@ -5,8 +5,6 @@ const express    = require('express'),
       cors       = require('cors')
       app        = express();
 
-// for config file
-require('dotenv').config();
       
 const todoRouter = require('./routers/todo_router');
 

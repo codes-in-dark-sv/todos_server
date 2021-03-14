@@ -11,7 +11,6 @@ module.exports.get_all_todos = (req, res) => {
 
 
  module.exports.submit_todo = (req, res) => {
-       console.log("todo sumbitted,", req.body)
       const {
         title,
         text
@@ -26,21 +25,8 @@ module.exports.get_all_todos = (req, res) => {
         } else{
             res.status(200).json({msg:"success"})
       }})
-      // Todo.findOneAndUpdate({title}, {title, text},(err, result) => {
-      //   if(result){
-      //      res.status(200).json({msg:"success"})
-      //    }
-      //    else{
-      //     const addTodo = new Todo({
-      //         title,
-      //         text
-      //     })
-          
-      //    }
   
-      // })
-  
-  }
+ }
 
 
   module.exports.get_todo = (req, res) =>{
@@ -56,5 +42,52 @@ module.exports.get_all_todos = (req, res) => {
   }
 
   module.exports.update_todo_details = (req, res)=>{
-        
+        const{
+              text,
+              status, 
+              _id,
+              title
+        }=req.body;
+        Todo.findByIdAndUpdate(_id, {title, text, status} , (err, result)=>{
+            if(err) return res.status(400).json({
+                  error: "error"
+              })
+              else{
+                  res.status(200).json({msg:"success"})
+              }
+
+        })
+  }
+
+  module.exports.remove_todo=(req, res)=>{
+        const {id}=req.body;
+        console.log(id)
+        Todo.findById(id, (err, result)=>{
+            if(err)
+            {
+                  return res.status(400).json({
+                  error: "error"
+                  })
+            } 
+            else
+            {  
+                  if(result.status=="INCOMPLETE"){
+                        res.status(200).json({msg:"impossible"}) 
+                  }
+                  else
+                  {
+                        Todo.deleteOne({_id:id}, (err, result)=>{
+                              if(err){
+                                    return res.status(400).json({
+                                    error: "error"
+                                    })
+                              } 
+                              else{ 
+                                    res.status(200).json({msg:"success"}) 
+                              }
+                        })
+                  }
+            }
+      })
+      
   }
