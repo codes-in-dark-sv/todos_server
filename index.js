@@ -29,7 +29,8 @@ mongoose.connect("mongodb://piyush_lazag:black_window@lazag-shard-00-00.rhhex.mo
       }
 })
 
-app.listen(8000, (err)=>{
+var PORT = 8000 || process.env.PORT
+app.listen(PORT, (err)=>{
       if(err)
             console.log("Error in listening port : ", err);
       else 
