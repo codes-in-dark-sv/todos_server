@@ -61,7 +61,6 @@ module.exports.get_all_todos = (req, res) => {
 
   module.exports.remove_todo=(req, res)=>{
         const {id}=req.body;
-        console.log(id)
         Todo.findById(id, (err, result)=>{
             if(err)
             {
