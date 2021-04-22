@@ -24,7 +24,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use('/api', todoRouter);
 
-const database = process.env.MONGO_URI || "mongodb://piyush_lazag:black_window@lazag-shard-00-00.rhhex.mongodb.net:27017,lazag-shard-00-01.rhhex.mongodb.net:27017,lazag-shard-00-02.rhhex.mongodb.net:27017/todoStore?ssl=true&replicaSet=atlas-dfi78d-shard-0&authSource=admin&retryWrites=true&w=majority"
+const database = process.env.MONGO_URI
 mongoose.connect(database, {
       useNewUrlParser: true,
       useCreateIndex: true,
